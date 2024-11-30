@@ -1,26 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Icon;
-use App\Models\LogMain;
-use App\Models\User;
-use App\Models\UserSetting;
-use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
-class DepartmentController extends Controller
+class RestController extends Controller
 {
-/**
+    /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        
-       
+        //
     }
 
     /**
@@ -70,9 +61,4 @@ class DepartmentController extends Controller
     {
         //
     }
-
-
-
-
-
 }

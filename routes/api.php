@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\DepartmentController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\JWTController;
+use App\Http\Controllers\RestController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -64,7 +65,9 @@ Route::group(['middleware' => 'jwt'], function () use ($role_department) {
     });
 
     Route::prefix('departments')->group(function () use ($role_department) {
-        Route::get('/', [DepartmentController::class, 'getAll'])->middleware($role_department);
+        Route::resource('/', DepartmentController::class)->middleware($role_department);
+        // Route::get('/', [DepartmentController::class, 'getAll'])->middleware($role_department);
+
      
     });
 });
