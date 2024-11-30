@@ -65,9 +65,10 @@ Route::group(['middleware' => 'jwt'], function () use ($role_department) {
     });
 
     Route::prefix('departments')->group(function () use ($role_department) {
-        Route::resource('/', DepartmentController::class)->middleware($role_department);
-        // Route::get('/', [DepartmentController::class, 'getAll'])->middleware($role_department);
-
-     
+        Route::get('', [DepartmentController::class, 'index'])->middleware($role_department);
+        Route::get('/{id}', [DepartmentController::class, 'byId'])->middleware($role_department);
+        Route::post('create', [DepartmentController::class, 'create'])->middleware($role_department);
+        Route::put('update', [DepartmentController::class, 'update'])->middleware($role_department);
+        Route::delete('delete/{id}', [DepartmentController::class, 'delete'])->middleware($role_department);
     });
 });

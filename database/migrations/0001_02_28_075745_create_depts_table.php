@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('code');
-            $table->string('note');
+            $table->string('note')->nullable();
             $table->boolean('active');
             $table->date('deleted_at')->nullable();
             $table->unsignedInteger('created_id')->nullable();

@@ -10,4 +10,6 @@ class Department extends Model
 {
     protected $table = "depts";
     public $timestamps = true;
+
+
 }

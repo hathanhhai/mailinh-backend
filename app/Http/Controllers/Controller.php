@@ -55,6 +55,25 @@ class Controller extends BaseController
 
     }
 
+    protected function setCreatedId($prop){
+        $prop->created_id = $this->user->id;
+    }
+    protected function setUpdatedId($prop){
+        $prop->updated_id = $this->user->id;
+    }
+    protected function setDeleteId($prop){
+        $prop->deleted_id = $this->user->id;
+    }
+
+    protected function setUpdateField($field,$model){
+        if(isset($this->request[$field])){
+         return $this->request[$field];
+        }else{
+            return $model[$field];
+        }
+    }
+
+
    
 
     public function view($path)
