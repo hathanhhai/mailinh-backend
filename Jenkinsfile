@@ -15,6 +15,7 @@ pipeline {
                  sh 'docker rm -f mailinh_backend &> /dev/null'
                  sh 'docker compose -f docker-compose.yml -p mailinh_backend up --build -d --force-recreate'
                  sh 'docker exec  mailinh_backend sh -c "chmod 777 -R storage/ && chmod 777 -R public/"'
+                 sh 'docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
             }
         }
 
