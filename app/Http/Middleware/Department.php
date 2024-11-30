@@ -26,14 +26,13 @@ class Department
         $auth = FacadesJWTAuth::parseToken()->authenticate();
         $userModel = new User();
         $user = $userModel->getDepartmentList($auth->id);
-        return $user;
+
         if (!empty($user->roles)) {
             $destinationController =   class_basename(Route::current()->controller);
             foreach ($user->roles as $item) {
                 $explodeCode = explode("_", $item->code);
                 $controllerFromCode = ucfirst(strtolower($explodeCode[0]));
-                echo  $controllerFromCode ;
-                // return;
+      
                 if (($controllerFromCode == mb_substr($destinationController, 0, strlen($controllerFromCode)))) {
                     $flag = true;
                 }
