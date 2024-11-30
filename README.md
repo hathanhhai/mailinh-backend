@@ -1,0 +1,1 @@
+docker compose -f docker-compose.yml -p mailinh_backend up --build -d --force-recreate

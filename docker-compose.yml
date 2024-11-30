@@ -1,0 +1,54 @@
+version: '3.8'
+services:
+
+  # mysql:
+  #   image: mysql:8.0-debian
+  #   container_name: mailinh_mysql
+  #   restart: unless-stopped
+  #   ports:
+  #     - "6606:3306"
+  #   volumes:
+  #     - mailinh-volume-mysql:/var/lib/mysql
+  #   environment:
+  #     MYSQL_DATABASE: "mailinh"
+  #     MYSQL_USER: "hthai"
+  #     MYSQL_PASSWORD: "789456123"
+  #     MYSQL_ROOT_PASSWORD: "789456123"
+  #   networks:
+  #      - mailinh-network
+    
+  # phpmyadmin:
+  #   image: phpmyadmin/phpmyadmin
+  #   container_name: mailinh_phpmyadmin
+  #   restart: unless-stopped
+  #   depends_on:
+  #     - mysql
+  #   ports:
+  #       - 6610:80
+  #   environment:
+  #     PMA_HOST: "mysql"
+  #     MYSQL_ROOT_PASSWORD: "789456123"
+  #   networks:
+  #     - mailinh-network
+
+  
+  backend:
+    image: mailinh_backend/backend
+    container_name: mailinh_backend
+    restart: unless-stopped
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "2072:6020"
+    volumes:
+      # - /hthai/jenkins_data/workspace/mailinh-vuong:/backend
+      - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+       - mailinh-network
+
+
+networks:
+  mailinh-network:
+volumes:
+  mailinh-volume-mysql:

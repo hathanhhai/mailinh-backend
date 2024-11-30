@@ -1,0 +1,15 @@
+stages:
+    - pull_code
+    - build
+    - deploy
+variables:
+  GIT_STRATEGY: clone
+pull_code:
+    stage: pull_code
+    image: docker:latest
+    services:
+    - docker:dind
+    script:
+        - whoami
+        - pwd
+        - ls
