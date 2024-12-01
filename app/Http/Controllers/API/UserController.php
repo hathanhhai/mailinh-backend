@@ -14,14 +14,29 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    
+
     public function user()
     {
 
         $auth = $this->user;
         if (!empty($auth)) {
             $user = new User();
-            $this->data =  $user->getDepartmentList($auth->id);
+            $me =  $user->getDepartmentList($auth->id);
+            $permission = [];
+            $roles = ['admin'];
+            if (!empty($me->roles)) {
+                foreach ($me->roles as $item) {
+                    $explodeCode = explode("_", $item->code);
+                    $elementPermisson = '';
+                    foreach ($explodeCode  as $code) {
+                        $elementPermisson = $elementPermisson . ucfirst(strtolower($code));
+                    }
+                    $permission[] =  $elementPermisson;
+                }
+            }
+            $me->permissions = $permission;
+            $me->roles = $roles;
+            $this->data = $me;
             return $this->response();
         }
         return $this->response();
@@ -29,7 +44,19 @@ class UserController extends Controller
 
     public function getAll()
     {
-        $this->response['users'] = User::all();
+        $users = User::paginate(10);
+        $data = $users->toArray()['data'];
+        // $data = $users['data'];
+        // foreach($users as $item){
+        //     echo($item);
+        //     // echo $item->current_page;
+        // }
+        $this->data['data'] =    $data;
+        $paginate = $data = $users->toArray();
+        unset($paginate['data']);
+        $this->data['paginate'] = $paginate;
+
+
         return $this->response();
     }
 }

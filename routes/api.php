@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::post('login', [JWTController::class, 'login']);
+Route::post('auth/login', [JWTController::class, 'login']);
 Route::post('logout', [JWTController::class, 'logout']);
 Route::post('register', [JWTController::class, 'register']);
 
@@ -59,9 +59,9 @@ $role_department = 'department';
 
 
 Route::group(['middleware' => 'jwt'], function () use ($role_department) {
+    Route::get('me', [UserController::class, 'user']);
     Route::prefix('users')->group(function () use ($role_department) {
         Route::get('/', [UserController::class, 'getAll'])->middleware($role_department);
-        Route::get('user', [UserController::class, 'user']);
     });
 
     Route::prefix('departments')->group(function () use ($role_department) {

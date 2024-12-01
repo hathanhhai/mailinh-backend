@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\JWT;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Env;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -37,6 +38,7 @@ class JWTController extends Controller
                 $this->response['statusCode'] = 403;
                 return $this->response();
             }
+            $this->data['expires_in'] = env('JWT_TTL');
             $this->data['access_token'] = $token;
             
             $this->response['success'] = true;
