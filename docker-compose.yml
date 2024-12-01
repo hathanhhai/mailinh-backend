@@ -41,6 +41,7 @@ services:
       dockerfile: Dockerfile
     ports:
       - "2072:6020"
+      - "2075:2075"
     volumes:
       - /hthai/jenkins_data/workspace/mailinh-frontend/dist:/frontend
       - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
