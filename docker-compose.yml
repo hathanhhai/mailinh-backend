@@ -1,35 +1,35 @@
 version: '3.8'
 services:
 
-  # mysql:
-  #   image: mysql:8.0-debian
-  #   container_name: mailinh_mysql
-  #   restart: unless-stopped
-  #   ports:
-  #     - "6606:3306"
-  #   volumes:
-  #     - mailinh-volume-mysql:/var/lib/mysql
-  #   environment:
-  #     MYSQL_DATABASE: "mailinh"
-  #     MYSQL_USER: "hthai"
-  #     MYSQL_PASSWORD: "789456123"
-  #     MYSQL_ROOT_PASSWORD: "789456123"
-  #   networks:
-  #      - mailinh-network
+  mysql:
+    image: mysql:8.0-debian
+    container_name: mailinh_mysql
+    restart: unless-stopped
+    ports:
+      - "6606:3306"
+    volumes:
+      - mailinh-volume-mysql:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: "mailinh"
+      MYSQL_USER: "hthai"
+      MYSQL_PASSWORD: "789456123"
+      MYSQL_ROOT_PASSWORD: "789456123"
+    networks:
+       - mailinh-network
     
-  # phpmyadmin:
-  #   image: phpmyadmin/phpmyadmin
-  #   container_name: mailinh_phpmyadmin
-  #   restart: unless-stopped
-  #   depends_on:
-  #     - mysql
-  #   ports:
-  #       - 6610:80
-  #   environment:
-  #     PMA_HOST: "mysql"
-  #     MYSQL_ROOT_PASSWORD: "789456123"
-  #   networks:
-  #     - mailinh-network
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: mailinh_phpmyadmin
+    restart: unless-stopped
+    depends_on:
+      - mysql
+    ports:
+        - 6610:80
+    environment:
+      PMA_HOST: "mysql"
+      MYSQL_ROOT_PASSWORD: "789456123"
+    networks:
+      - mailinh-network
 
   
   backend:
